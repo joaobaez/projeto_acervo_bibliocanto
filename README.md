@@ -10,7 +10,7 @@ Funcionalidades a serem adicionadas:
 
 ## Créditos e Licenças
 
-Este projeto utiliza software open-source mantidos por:
+Este projeto utiliza softwares open-source mantidos por:
 
 - Flask / Jinja2 — Pallets Projects (BSD-3)
 - SQLAlchemy — SQLAlchemy Project (MIT)
