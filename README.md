@@ -1,6 +1,6 @@
 ## Créditos e Licenças
 
-Este projeto utiliza software open-source mantido por:
+Este projeto utiliza software open-source mantidos por:
 
 - Flask / Jinja2 — Pallets Projects (BSD-3)
 - SQLAlchemy — SQLAlchemy Project (MIT)
