@@ -5,7 +5,7 @@ Funcionalidades a serem adicionadas:
 - Interface para administradores - cadastro de produtos e criação de relatórios estatísticos;
 - Carrinho de compras;
 - Checkout;
-- Categorias de produtos;
+- Categorias de produtos
 
 
 ## Créditos e Licenças
