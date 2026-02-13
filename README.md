@@ -1,3 +1,13 @@
+##Trabalho em Progresso
+
+Funcionalidades a serem adicionadas:
+
+- Interface para administradores - cadastro de produtos e criação de relatórios estatísticos;
+- Carrinho de compras;
+- Checkout;
+- Categorias de produtos;
+
+
 ## Créditos e Licenças
 
 Este projeto utiliza software open-source mantidos por:
