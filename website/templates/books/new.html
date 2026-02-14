@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar item{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+
+
+<div class="container ps-5">
+    <h1>Adicionar item ao Catálogo</h1>
+    <br>
+    <form method="POST">
+        <div class="form-group">
+            <label for="search_query">Pesquisa de título</label>
+            <input type="text" class="form-control" id="search_query", name="search_query" placeholder="Só título por enquanto"/>
+        </div>
+        <div>
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

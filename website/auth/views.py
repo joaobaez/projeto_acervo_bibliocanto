@@ -1,0 +1,79 @@
+from flask import render_template, request, flash, redirect, url_for
+from . import bp
+from .models import User
+from ..extensions import db
+from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+auth_bp = bp
+
+
+@auth_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        email = request.form.get('email')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Este e-mail já existe', category='error')
+        elif len(first_name) < 2:
+            flash('Seu nome deve ter pelo menos 3 dígitos.', category='error')
+        elif len(last_name) < 2:
+            flash('Seu sobrenome deve ter pelo menos 3 dígitos.', category='error')
+        elif len(email) < 4:
+            flash('Preencha o campo de-mail com pelo menos 5 dígitos.', category='error')
+        elif password1 != password2:
+            flash('As senhas não coincidem, tente novamente.', category='error')
+        elif len(password1) < 7:
+            flash('Sua senha deve ter pelo menos 8 dígitos.', category='error')
+        else:
+            new_user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password1, method='scrypt'))
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Conta criada com sucesso.', category='success')
+            return redirect(url_for('books.index'))
+
+    return render_template('auth/register.html', user=current_user)
+
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password,password):
+                flash('Seja bem-vindo', category='success')
+                login_user(user, remember=True)
+                return redirect(url_for('books.index'))
+            else:
+                flash('Senha incorreta', category='error')
+        else:
+            flash('Este e-mail não existe', category='error')
+
+    return render_template('auth/login.html', user=current_user)
+
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Usuário desconectado', category='sucess')
+    return redirect(url_for('books.index'))
+
+
+@auth_bp.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+
+@auth_bp.route('/cart')
+def cart():
+    return render_template('cart.html')
